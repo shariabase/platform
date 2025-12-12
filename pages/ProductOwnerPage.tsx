@@ -17,6 +17,13 @@ interface ProductOwnerPageProps {
   onLogout?: () => void;
 }
 
+// Default user for demo mode
+const defaultUser = {
+  id: 'demo-product-owner',
+  name: 'Mohammed Ali',
+  role: 'product-owner' as const,
+};
+
 // Mock workflows data
 const mockWorkflows: Workflow[] = [
   {
@@ -85,7 +92,7 @@ const mockActivities: AuditLog[] = [
   },
 ];
 
-export const ProductOwnerPage: React.FC<ProductOwnerPageProps> = ({ user, onLogout }) => {
+export const ProductOwnerPage: React.FC<ProductOwnerPageProps> = ({ user = defaultUser, onLogout }) => {
   const [showCreateWizard, setShowCreateWizard] = useState(false);
   const [showDocuments, setShowDocuments] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);

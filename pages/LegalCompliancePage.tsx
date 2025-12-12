@@ -17,6 +17,13 @@ interface LegalCompliancePageProps {
   onLogout?: () => void;
 }
 
+// Default user for demo mode
+const defaultUser = {
+  id: 'demo-legal',
+  name: 'Sarah Legal',
+  role: 'legal-compliance' as const,
+};
+
 // Mock compliance checks
 const generateMockChecks = (productId: string): ComplianceCheck[] => [
   {
@@ -210,7 +217,7 @@ const mockActivities: AuditLog[] = [
   },
 ];
 
-export const LegalCompliancePage: React.FC<LegalCompliancePageProps> = ({ user, onLogout }) => {
+export const LegalCompliancePage: React.FC<LegalCompliancePageProps> = ({ user = defaultUser, onLogout }) => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [complianceChecks, setComplianceChecks] = useState<Record<string, ComplianceCheck[]>>({});
   const [contractReviews, setContractReviews] = useState<Record<string, ContractReview>>({});

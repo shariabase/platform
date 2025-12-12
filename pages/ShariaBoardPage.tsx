@@ -11,6 +11,12 @@ interface ShariaBoardPageProps {
   onLogout?: () => void;
 }
 
+// Default user for demo mode
+const defaultUser = {
+  name: 'Dr. Ahmed Hassan',
+  role: 'sharia-scholar' as const,
+};
+
 // Mock data for Sharia review queue
 const mockPendingReviews: Product[] = [
   {
@@ -118,7 +124,7 @@ const mockActivities: AuditLog[] = [
   },
 ];
 
-export const ShariaBoardPage: React.FC<ShariaBoardPageProps> = ({ user, onLogout }) => {
+export const ShariaBoardPage: React.FC<ShariaBoardPageProps> = ({ user = defaultUser, onLogout }) => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [newComment, setNewComment] = useState('');
 

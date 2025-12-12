@@ -16,6 +16,13 @@ interface RiskAuditPageProps {
   onLogout?: () => void;
 }
 
+// Default user for demo mode
+const defaultUser = {
+  id: 'demo-risk',
+  name: 'Risk Analyst',
+  role: 'risk-audit' as const,
+};
+
 // Mock risk assessments
 const generateMockAssessments = (productId: string): RiskAssessment[] => [
   {
@@ -154,7 +161,7 @@ const mockActivities: AuditLog[] = [
   },
 ];
 
-export const RiskAuditPage: React.FC<RiskAuditPageProps> = ({ user, onLogout }) => {
+export const RiskAuditPage: React.FC<RiskAuditPageProps> = ({ user = defaultUser, onLogout }) => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [riskAssessments, setRiskAssessments] = useState<Record<string, RiskAssessment[]>>({});
   const [transactions, setTransactions] = useState(mockTransactions);
