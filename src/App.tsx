@@ -148,6 +148,28 @@ const LandingPage: React.FC<{ onRoleSelect: (role: UserRole) => void }> = ({ onR
   );
 };
 
+// Layout wrapper for pages with navigation
+const MainLayout: React.FC<{ 
+  children: React.ReactNode; 
+  currentRole: UserRole; 
+  onRoleChange: (role: UserRole) => void 
+}> = ({ children, currentRole, onRoleChange }) => {
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <Navigation currentRole={currentRole} onRoleChange={onRoleChange} />
+      <main>{children}</main>
+    </div>
+  );
+};
+
+// Engineering placeholder
+const EngineeringPage: React.FC = () => (
+  <div className="max-w-7xl mx-auto px-4 py-12 text-center">
+    <h1 className="text-2xl font-bold text-gray-900 mb-4">Engineering Portal</h1>
+    <p className="text-gray-500">Coming soon - Smart contract deployment interface</p>
+  </div>
+);
+
 // Main App component
 const App: React.FC = () => {
   const [currentRole, setCurrentRole] = useState<UserRole>('product-owner');
@@ -158,38 +180,51 @@ const App: React.FC = () => {
         {/* Landing page */}
         <Route path="/" element={<LandingPage onRoleSelect={setCurrentRole} />} />
         
-        {/* Customer portal has its own layout */}
+        {/* Customer portal - standalone layout */}
         <Route path="/customer" element={<CustomerPortalPage />} />
         
-        {/* Regulator portal has its own layout */}
+        {/* Regulator portal - standalone layout */}
         <Route path="/regulator" element={<RegulatorPage />} />
         
-        {/* All other pages with shared navigation */}
-        <Route
-          path="/*"
-          element={
-            <div className="min-h-screen bg-gray-50">
-              <Navigation currentRole={currentRole} onRoleChange={setCurrentRole} />
-              <main>
-                <Routes>
-                  <Route path="/product-owner" element={<ProductOwnerPage />} />
-                  <Route path="/sharia-board" element={<ShariaBoardPage />} />
-                  <Route path="/legal-compliance" element={<LegalCompliancePage />} />
-                  <Route path="/risk-audit" element={<RiskAuditPage />} />
-                  <Route path="/sales-service" element={<SalesServicePage />} />
-                  <Route path="/documents" element={<DocumentsPage />} />
-                  <Route path="/engineering" element={
-                    <div className="max-w-7xl mx-auto px-4 py-12 text-center">
-                      <h1 className="text-2xl font-bold text-gray-900 mb-4">Engineering Portal</h1>
-                      <p className="text-gray-500">Coming soon - Smart contract deployment interface</p>
-                    </div>
-                  } />
-                  <Route path="*" element={<Navigate to="/" replace />} />
-                </Routes>
-              </main>
-            </div>
-          }
-        />
+        {/* Pages with shared navigation */}
+        <Route path="/product-owner" element={
+          <MainLayout currentRole={currentRole} onRoleChange={setCurrentRole}>
+            <ProductOwnerPage />
+          </MainLayout>
+        } />
+        <Route path="/sharia-board" element={
+          <MainLayout currentRole={currentRole} onRoleChange={setCurrentRole}>
+            <ShariaBoardPage />
+          </MainLayout>
+        } />
+        <Route path="/legal-compliance" element={
+          <MainLayout currentRole={currentRole} onRoleChange={setCurrentRole}>
+            <LegalCompliancePage />
+          </MainLayout>
+        } />
+        <Route path="/risk-audit" element={
+          <MainLayout currentRole={currentRole} onRoleChange={setCurrentRole}>
+            <RiskAuditPage />
+          </MainLayout>
+        } />
+        <Route path="/sales-service" element={
+          <MainLayout currentRole={currentRole} onRoleChange={setCurrentRole}>
+            <SalesServicePage />
+          </MainLayout>
+        } />
+        <Route path="/documents" element={
+          <MainLayout currentRole={currentRole} onRoleChange={setCurrentRole}>
+            <DocumentsPage />
+          </MainLayout>
+        } />
+        <Route path="/engineering" element={
+          <MainLayout currentRole={currentRole} onRoleChange={setCurrentRole}>
+            <EngineeringPage />
+          </MainLayout>
+        } />
+        
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );
