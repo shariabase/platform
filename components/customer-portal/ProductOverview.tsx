@@ -14,7 +14,7 @@ import {
 } from '../../types/customer';
 
 interface ProductOverviewProps {
-  products: CustomerProduct[];
+  products?: CustomerProduct[];
   onViewDetails?: (product: CustomerProduct) => void;
   onMakePayment?: (product: CustomerProduct) => void;
 }

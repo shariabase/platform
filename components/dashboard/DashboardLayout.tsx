@@ -4,16 +4,21 @@ import { getRoleConfig } from '../../types/roles';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
-  userRole: UserRole;
-  userName: string;
-  onLogout: () => void;
+  userRole?: UserRole;
+  userName?: string;
+  title?: string;
+  subtitle?: string;
+  role?: string;
+  onLogout?: () => void;
 }
 
 export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   children,
-  userRole,
-  userName,
-  onLogout,
+  userRole = 'product-owner',
+  userName = 'Demo User',
+  title,
+  subtitle,
+  onLogout = () => {},
 }) => {
   const roleConfig = getRoleConfig(userRole);
 

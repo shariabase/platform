@@ -6,6 +6,7 @@ interface CardProps {
   padding?: 'none' | 'sm' | 'md' | 'lg';
   shadow?: 'none' | 'sm' | 'md' | 'lg';
   border?: boolean;
+  onClick?: () => void;
 }
 
 interface CardHeaderProps {
@@ -44,6 +45,7 @@ export const Card: React.FC<CardProps> = ({
   padding = 'md',
   shadow = 'sm',
   border = true,
+  onClick,
 }) => {
   return (
     <div
@@ -52,8 +54,10 @@ export const Card: React.FC<CardProps> = ({
         ${paddingStyles[padding]}
         ${shadowStyles[shadow]}
         ${border ? 'border border-gray-200' : ''}
+        ${onClick ? 'cursor-pointer' : ''}
         ${className}
       `}
+      onClick={onClick}
     >
       {children}
     </div>

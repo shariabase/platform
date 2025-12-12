@@ -8,12 +8,12 @@ import { Product, RiskAssessment, RiskCategory, RiskLevel, AuditLog } from '../t
 import { PRODUCT_STATUS_LABELS, ASSET_TYPE_INFO, RISK_LEVEL_CONFIG } from '../utils/constants';
 
 interface RiskAuditPageProps {
-  user: {
+  user?: {
     id: string;
     name: string;
     role: 'risk-audit';
   };
-  onLogout: () => void;
+  onLogout?: () => void;
 }
 
 // Mock risk assessments

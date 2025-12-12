@@ -4,11 +4,11 @@ import { Card, CardHeader, CardBody, Button, Badge, Avatar } from '../components
 import { Product, Document, Comment, AuditLog } from '../types';
 
 interface ShariaBoardPageProps {
-  user: {
+  user?: {
     name: string;
     role: 'sharia-scholar';
   };
-  onLogout: () => void;
+  onLogout?: () => void;
 }
 
 // Mock data for Sharia review queue

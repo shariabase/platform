@@ -6,13 +6,13 @@ import { UserRole, DocumentType } from '../types';
 import { DOCUMENT_TYPE_CONFIGS } from '../types/documents';
 
 interface DocumentsPageProps {
-  user: {
+  user?: {
     id: string;
     name: string;
     role: UserRole;
   };
-  productId: string;
-  onLogout: () => void;
+  productId?: string;
+  onLogout?: () => void;
 }
 
 /**

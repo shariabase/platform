@@ -9,12 +9,12 @@ import { ContractReview, ContractClause, ContractIssue, RegulatoryAlert, AAOIFI_
 import { PRODUCT_STATUS_LABELS, ASSET_TYPE_INFO } from '../utils/constants';
 
 interface LegalCompliancePageProps {
-  user: {
+  user?: {
     id: string;
     name: string;
     role: 'legal-compliance';
   };
-  onLogout: () => void;
+  onLogout?: () => void;
 }
 
 // Mock compliance checks

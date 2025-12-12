@@ -3,7 +3,7 @@ import { Card, CardHeader, CardBody, Avatar } from '../shared';
 import { AuditLog } from '../../types';
 
 interface RecentActivityWidgetProps {
-  activities: AuditLog[];
+  activities?: AuditLog[];
   maxItems?: number;
 }
 
@@ -66,11 +66,48 @@ const formatTimeAgo = (date: Date): string => {
   return `${diffDays}d ago`;
 };
 
+// Mock default activities
+const DEFAULT_ACTIVITIES: AuditLog[] = [
+  {
+    id: 'act-1',
+    timestamp: new Date(Date.now() - 30 * 60000),
+    userId: 'user-1',
+    userName: 'Product Team',
+    action: 'created new product',
+    entityType: 'product',
+    entityId: 'prod-1',
+    details: {},
+    hash: 'hash-1',
+  },
+  {
+    id: 'act-2',
+    timestamp: new Date(Date.now() - 2 * 3600000),
+    userId: 'user-2',
+    userName: 'Sharia Board',
+    action: 'approved product structure',
+    entityType: 'workflow',
+    entityId: 'wf-1',
+    details: {},
+    hash: 'hash-2',
+  },
+  {
+    id: 'act-3',
+    timestamp: new Date(Date.now() - 5 * 3600000),
+    userId: 'user-3',
+    userName: 'Legal Team',
+    action: 'uploaded contract draft',
+    entityType: 'document',
+    entityId: 'doc-1',
+    details: {},
+    hash: 'hash-3',
+  },
+];
+
 export const RecentActivityWidget: React.FC<RecentActivityWidgetProps> = ({
-  activities,
+  activities = DEFAULT_ACTIVITIES,
   maxItems = 5,
 }) => {
-  const displayActivities = activities.slice(0, maxItems);
+  const displayActivities = (activities || []).slice(0, maxItems);
 
   return (
     <Card>

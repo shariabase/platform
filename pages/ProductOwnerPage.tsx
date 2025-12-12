@@ -9,12 +9,12 @@ import { ProductCreationData, JURISDICTION_CONFIGS } from '../types/products';
 import { ASSET_TYPE_INFO, PRODUCT_STATUS_LABELS } from '../utils/constants';
 
 interface ProductOwnerPageProps {
-  user: {
+  user?: {
     id: string;
     name: string;
     role: 'product-owner';
   };
-  onLogout: () => void;
+  onLogout?: () => void;
 }
 
 // Mock workflows data
