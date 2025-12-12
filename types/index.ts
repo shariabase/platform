@@ -381,3 +381,6 @@ export interface Notification {
 
 // Re-export document types for convenience
 export * from './documents';
+export * from './sales';
+export * from './customer';
+export * from './notifications';

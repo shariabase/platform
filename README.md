@@ -14,17 +14,17 @@ This platform streamlines the end-to-end lifecycle of Sharia-compliant financial
 | **Sharia Scholar / SSB** | Reviews structures, issues fatwas | ✅ Implemented |
 | **Legal & Compliance** | Regulatory checks, contract review | ✅ Implemented |
 | **Risk Management & Audit** | Risk evaluation, internal audit | ✅ Implemented |
+| **Sales & Customer Service** | Customer onboarding, training | ✅ Implemented |
+| **Regulator / External Auditor** | Compliance verification | ✅ Implemented |
+| **End Customer** | Product interaction | ✅ Implemented |
 | **IT/Engineering** | Smart contract deployment | 🔜 Planned |
-| **Sales & Customer Service** | Customer onboarding, training | 🔜 Planned |
-| **Regulator / External Auditor** | Compliance verification | 🔜 Planned |
-| **End Customer** | Product interaction | 🔜 Planned |
 
 ## 📁 Project Structure
 
 ```
 /workspace
 ├── /components
-│   ├── /shared                    ← Reusable UI components (5 components)
+│   ├── /shared                    ← Reusable UI components (6 components)
 │   ├── /documents                 ← Document management (6 components)
 │   ├── /dashboard                 ← Dashboard widgets (4 components)
 │   ├── /product-owner             ← Product Owner features (3 components)
@@ -32,6 +32,9 @@ This platform streamlines the end-to-end lifecycle of Sharia-compliant financial
 │   ├── /legal-compliance          ← Legal review features (3 components)
 │   ├── /risk-audit                ← Risk management features (3 components)
 │   ├── /meetings                  ← Meeting management (3 components)
+│   ├── /sales-service             ← Sales & service features (5 components)
+│   ├── /customer-portal           ← Customer-facing features (3 components)
+│   ├── /regulator                 ← Regulatory features (2 components)
 │   ├── /workflow                  ← Workflow components
 │   └── /auth                      ← Authentication
 ├── /pages
@@ -39,6 +42,9 @@ This platform streamlines the end-to-end lifecycle of Sharia-compliant financial
 │   ├── ShariaBoardPage.tsx        ← Sharia review workspace
 │   ├── LegalCompliancePage.tsx    ← Legal & Compliance workspace
 │   ├── RiskAuditPage.tsx          ← Risk Management dashboard
+│   ├── SalesServicePage.tsx       ← Sales & Service workspace
+│   ├── CustomerPortalPage.tsx     ← Customer self-service portal
+│   ├── RegulatorPage.tsx          ← Regulatory audit portal
 │   ├── DocumentsPage.tsx          ← Document management
 │   └── index.ts
 ├── /hooks
@@ -46,6 +52,7 @@ This platform streamlines the end-to-end lifecycle of Sharia-compliant financial
 │   ├── useWorkflow.ts
 │   ├── useDocuments.ts
 │   ├── useProducts.ts
+│   ├── useNotifications.ts
 │   └── index.ts
 ├── /types
 │   ├── index.ts                   ← Core types (40+ interfaces)
@@ -53,6 +60,9 @@ This platform streamlines the end-to-end lifecycle of Sharia-compliant financial
 │   ├── products.ts                ← Product & template types
 │   ├── compliance.ts              ← Compliance & legal types
 │   ├── meetings.ts                ← Meeting types
+│   ├── sales.ts                   ← Sales & customer types
+│   ├── customer.ts                ← Customer portal types
+│   ├── notifications.ts           ← Notification types
 │   └── roles.ts                   ← Role configurations
 ├── /utils
 │   ├── constants.ts
@@ -109,6 +119,39 @@ This platform streamlines the end-to-end lifecycle of Sharia-compliant financial
 - ✅ Approval tracking
 - ✅ Comment threads
 
+### 7. Sales & Customer Service Portal
+- ✅ Sales pipeline (Kanban & list view)
+- ✅ Lead management with status tracking
+- ✅ Customer KYC onboarding workflow
+- ✅ Application tracker with status progression
+- ✅ Product narratives for customer communication
+- ✅ Training modules with progress tracking
+- ✅ Role-specific training (Sales vs Customer Service)
+
+### 8. Customer Self-Service Portal
+- ✅ Product portfolio overview
+- ✅ Payment schedule and history
+- ✅ Sharia education center (articles, FAQ)
+- ✅ Document access and downloads
+- ✅ Support ticket system
+- ✅ Simplified Sharia compliance explanations
+
+### 9. Regulatory / Auditor Portal
+- ✅ Immutable audit log viewer
+- ✅ Hash chain verification
+- ✅ Compliance report viewer
+- ✅ Product registry browser
+- ✅ Export functionality (PDF, Excel, JSON)
+- ✅ Read-only access controls
+
+### 10. Real-Time Notifications
+- ✅ Notification center (bell dropdown)
+- ✅ Priority levels (low, normal, high, urgent)
+- ✅ Category filters (workflow, document, meeting, etc.)
+- ✅ Mark as read / dismiss
+- ✅ Grouped by date
+- ✅ Toast notifications for real-time alerts
+
 ## 🏗️ Product Templates
 
 | Template | Asset Type | Est. Duration |
@@ -134,6 +177,26 @@ This platform streamlines the end-to-end lifecycle of Sharia-compliant financial
 | Audit Report | Risk, Regulator |
 | Training Material | Product Owner, Sales |
 | Customer Disclosure | Product Owner, Legal, Sales |
+
+## 🛒 Sales & Service Features
+
+| Feature | Description |
+|---------|-------------|
+| **Lead Pipeline** | Kanban board with stages (New → Won/Lost) |
+| **KYC Onboarding** | Document checklist by customer type |
+| **Application Tracker** | Multi-stage progress tracking |
+| **Product Narratives** | Simplified product info for customers |
+| **Training Center** | Video, document, quiz modules |
+
+## 👤 Customer Portal Features
+
+| Feature | Description |
+|---------|-------------|
+| **My Products** | Active product cards with status |
+| **Payment Schedule** | Upcoming, history, transactions |
+| **Sharia Education** | Interactive learning content |
+| **Documents** | Contracts, statements, certificates |
+| **Support** | Ticket-based help system |
 
 ## 🔒 Compliance Standards
 
@@ -178,19 +241,26 @@ npm test
 
 ## 📊 Implementation Stats
 
-- **Components**: 30+ React components
-- **Types**: 80+ TypeScript interfaces
-- **Pages**: 5 role-specific dashboards
-- **Hooks**: 4 custom React hooks
+- **Components**: 45+ React components
+- **Types**: 120+ TypeScript interfaces
+- **Pages**: 8 role-specific dashboards
+- **Hooks**: 5 custom React hooks
 - **Product Templates**: 8 pre-configured
 
 ## 🔐 Security Features
 
 - SHA-256 document hashing for immutability
 - Role-based access control (RBAC)
-- Tamper-evident audit logging
+- Tamper-evident audit logging (hash chain)
 - Digital signature support for approvals
 - Document access logging
+- Read-only regulator access
+
+## 🔜 Remaining Features (Planned)
+
+| Feature | Description |
+|---------|-------------|
+| Engineering Portal | Smart contract deployment interface |
 
 ## 📄 License
 
