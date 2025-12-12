@@ -24,33 +24,106 @@ This platform streamlines the end-to-end lifecycle of Sharia-compliant financial
 ```
 /workspace
 ├── /components
-│   ├── /shared              ← Reusable UI components (Button, Card, Modal, etc.)
-│   ├── /dashboard           ← Dashboard widgets and layouts
-│   ├── /product-owner       ← Product owner specific components
-│   ├── /sharia-board        ← Sharia scholar workspace components
-│   ├── /legal-compliance    ← Legal review components
-│   ├── /risk-audit          ← Risk assessment components
-│   ├── /engineering         ← Smart contract/deployment components
-│   ├── /sales-service       ← Customer service components
-│   ├── /regulator           ← Auditor/regulator components
-│   ├── /customer-portal     ← End customer components
-│   ├── /meetings            ← Meeting management components
-│   ├── /documents           ← Document management components
-│   ├── /workflow            ← Workflow engine components
-│   └── /auth                ← Authentication components
-├── /pages                   ← Page-level components
-│   ├── ProductOwnerPage.tsx
-│   ├── ShariaBoardPage.tsx
-│   └── [other role pages]
-├── /hooks                   ← Custom React hooks
-│   ├── useAuth.ts
-│   └── useWorkflow.ts
-├── /utils                   ← Helper functions, constants
-│   └── constants.ts
-└── /types                   ← TypeScript definitions
-    ├── index.ts             ← Core types
-    └── roles.ts             ← Role configurations
+│   ├── /shared                  ← Reusable UI components
+│   │   ├── Button.tsx
+│   │   ├── Card.tsx
+│   │   ├── Badge.tsx
+│   │   ├── Modal.tsx
+│   │   ├── Avatar.tsx
+│   │   └── index.ts
+│   ├── /documents               ← 📄 DOCUMENT MANAGEMENT SYSTEM
+│   │   ├── DocumentCard.tsx     ← Individual document display
+│   │   ├── DocumentUploader.tsx ← Drag-and-drop upload
+│   │   ├── DocumentList.tsx     ← Filterable document list
+│   │   ├── DocumentViewer.tsx   ← Document preview modal
+│   │   ├── DocumentVersionHistory.tsx ← Version timeline
+│   │   ├── DocumentPanel.tsx    ← Self-contained document panel
+│   │   └── index.ts
+│   ├── /dashboard               ← Dashboard widgets
+│   ├── /sharia-board            ← Sharia Scholar components
+│   ├── /legal-compliance        ← Legal review components
+│   ├── /risk-audit              ← Risk assessment components
+│   ├── /workflow                ← Workflow engine components
+│   └── /auth                    ← Authentication components
+├── /pages
+│   ├── ProductOwnerPage.tsx     ← Product Owner dashboard
+│   ├── ShariaBoardPage.tsx      ← Sharia review workspace
+│   ├── DocumentsPage.tsx        ← Document management page
+│   └── index.ts
+├── /hooks
+│   ├── useAuth.ts               ← Authentication logic
+│   ├── useWorkflow.ts           ← Workflow management
+│   ├── useDocuments.ts          ← 📄 Document CRUD operations
+│   └── index.ts
+├── /types
+│   ├── index.ts                 ← Core types
+│   ├── roles.ts                 ← Role configurations
+│   └── documents.ts             ← 📄 Document type definitions
+├── /utils
+│   ├── constants.ts             ← Labels, configs
+│   └── documentHelpers.ts       ← 📄 Document utilities
+├── package.json
+├── tsconfig.json
+├── tailwind.config.js
+└── README.md
 ```
+
+## 📄 Document Management System
+
+The Document Management System is a core feature that enables all roles to upload, view, and track documents with full version control and audit trail.
+
+### Features
+
+| Feature | Description |
+|---------|-------------|
+| **Drag & Drop Upload** | Intuitive file upload with validation |
+| **Version Control** | Track all versions with change notes |
+| **Hash Verification** | SHA-256 hashing for document integrity |
+| **Role-Based Permissions** | Control who can upload which document types |
+| **Access Logging** | Track who viewed/downloaded documents |
+| **Search & Filter** | Find documents by type, date, or keyword |
+| **Multiple View Modes** | Grid or list view |
+
+### Document Types
+
+| Type | Icon | Allowed Roles |
+|------|------|---------------|
+| Research | 📊 | Product Owner, Legal, Risk |
+| Fatwa | 📜 | Sharia Scholar only |
+| Sharia Opinion | 💭 | Sharia Scholar only |
+| Contract Draft | 📝 | Product Owner, Legal |
+| Regulatory Filing | 🏛️ | Legal, Risk |
+| Audit Report | 🔍 | Risk, Regulator |
+| Training Material | 📚 | Product Owner, Sales |
+| Customer Disclosure | 📋 | Product Owner, Legal, Sales |
+
+### Usage
+
+```tsx
+// Embed DocumentPanel in any page
+import { DocumentPanel } from '../components/documents';
+
+<DocumentPanel
+  productId="product-123"
+  userRole="sharia-scholar"
+  userId="user-456"
+  userName="Dr. Ahmed"
+  title="Product Documents"
+  showUploadButton={true}
+/>
+
+// Use the hook directly for custom implementations
+import { useDocuments } from '../hooks';
+
+const { documents, uploadDocument, uploadNewVersion } = useDocuments('product-123');
+```
+
+### Immutability & Compliance
+
+- All documents are hashed using SHA-256
+- Documents cannot be modified—only new versions can be added
+- Complete audit trail for regulatory compliance
+- Tamper-evident logging for all access
 
 ## 🏗️ Architecture
 
@@ -61,10 +134,12 @@ This platform streamlines the end-to-end lifecycle of Sharia-compliant financial
    - Stage transitions: Initiation → Sharia Review → Legal Review → Risk Review → Engineering → Deployment
    - Role-based approval gates
 
-2. **Document Management**
+2. **Document Management** ✅ IMPLEMENTED
    - Version control for all documents
    - Immutable audit trail with hash verification
    - Document types: Research, Fatwas, Opinions, Contracts, Audit Reports
+   - Role-based upload permissions
+   - Search, filter, and sort capabilities
 
 3. **Collaboration Workspace**
    - Threaded comments with @mentions
@@ -130,29 +205,43 @@ Before creating components, document:
 - Utils: `camelCase.ts` (e.g., `constants.ts`)
 - Types: `camelCase.ts` (e.g., `index.ts`, `roles.ts`)
 
-## 📊 Current State
+## 📊 Current Implementation Status
 
-### Implemented
+### ✅ Implemented
 
-- [x] Core type definitions
+- [x] Core type definitions (40+ interfaces)
 - [x] Role configuration system
 - [x] Shared UI components (Button, Card, Badge, Modal, Avatar)
-- [x] Dashboard layout and widgets
+- [x] Dashboard framework with widgets
 - [x] Product Owner dashboard page
 - [x] Sharia Board review workspace
 - [x] Authentication hook
 - [x] Workflow management hook
+- [x] **Document Management System** (NEW)
+  - [x] DocumentCard component
+  - [x] DocumentUploader with drag-and-drop
+  - [x] DocumentList with filters
+  - [x] DocumentViewer modal
+  - [x] DocumentVersionHistory
+  - [x] DocumentPanel (reusable)
+  - [x] useDocuments hook
+  - [x] Document type definitions
+  - [x] Document helpers & utilities
 
-### Planned
+### 🔜 Next Up
 
 - [ ] Legal & Compliance workspace
 - [ ] Risk Management dashboard
+- [ ] Meeting management system
+- [ ] Product creation flow
+- [ ] Enhanced workflow engine
+
+### 📅 Planned
+
 - [ ] Engineering deployment interface
 - [ ] Sales & Customer Service portal
 - [ ] Regulator audit interface
 - [ ] Customer portal
-- [ ] Meeting management system
-- [ ] Document upload/versioning UI
 - [ ] Smart contract integration
 - [ ] Real-time notifications
 
@@ -162,6 +251,7 @@ Before creating components, document:
 - Document hashes ensure immutability
 - Audit logs are tamper-evident (blockchain-style linking)
 - Role-based access control (RBAC) enforced at all levels
+- Document access logging for compliance
 
 ## 📄 License
 

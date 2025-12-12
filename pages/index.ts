@@ -2,6 +2,7 @@
 
 export { ProductOwnerPage } from './ProductOwnerPage';
 export { ShariaBoardPage } from './ShariaBoardPage';
+export { DocumentsPage } from './DocumentsPage';
 
 // Additional pages to be implemented:
 // export { LegalCompliancePage } from './LegalCompliancePage';

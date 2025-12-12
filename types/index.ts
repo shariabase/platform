@@ -378,3 +378,6 @@ export interface Notification {
   read: boolean;
   createdAt: Date;
 }
+
+// Re-export document types for convenience
+export * from './documents';
