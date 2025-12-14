@@ -50,11 +50,11 @@ export const Card: React.FC<CardProps> = ({
   return (
     <div
       className={`
-        bg-white rounded-lg
+        bg-[#0d1320] rounded-lg
         ${paddingStyles[padding]}
         ${shadowStyles[shadow]}
-        ${border ? 'border border-gray-200' : ''}
-        ${onClick ? 'cursor-pointer' : ''}
+        ${border ? 'border border-gray-800' : ''}
+        ${onClick ? 'cursor-pointer hover:bg-[#131b2e] transition-colors' : ''}
         ${className}
       `}
       onClick={onClick}
@@ -70,20 +70,20 @@ export const CardHeader: React.FC<CardHeaderProps> = ({
   action,
 }) => {
   return (
-    <div className={`flex items-center justify-between pb-4 border-b border-gray-200 ${className}`}>
-      <div className="font-semibold text-gray-900">{children}</div>
+    <div className={`flex items-center justify-between pb-4 border-b border-gray-800 ${className}`}>
+      <div className="font-semibold text-white">{children}</div>
       {action && <div>{action}</div>}
     </div>
   );
 };
 
 export const CardBody: React.FC<CardBodyProps> = ({ children, className = '' }) => {
-  return <div className={`py-4 ${className}`}>{children}</div>;
+  return <div className={`py-4 text-gray-300 ${className}`}>{children}</div>;
 };
 
 export const CardFooter: React.FC<CardFooterProps> = ({ children, className = '' }) => {
   return (
-    <div className={`pt-4 border-t border-gray-200 ${className}`}>
+    <div className={`pt-4 border-t border-gray-800 ${className}`}>
       {children}
     </div>
   );

@@ -7,3 +7,4 @@ export { Badge, StatusBadge, RoleBadge } from './Badge';
 export { Modal } from './Modal';
 export { Avatar, AvatarGroup } from './Avatar';
 export { NotificationCenter, NotificationToast } from './NotificationCenter';
+export { TopNavigation } from './TopNavigation';
